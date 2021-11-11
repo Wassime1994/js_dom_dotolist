@@ -1,0 +1,39 @@
+  console.log(element.children);
+        let supprAll = document.querySelectorAll('.supprime')
+        let modifAll = document.querySelectorAll('.modif')
+        supprAll.forEach(element => {
+            element.addEventListener('click', () => {
+                element.parentElement.remove()
+            })
+        })
+        modifAll.forEach(element => {
+            element.addEventListener('click', () => {
+                element.parentElement.append(input)
+                btnCreate = document.createElement('button')
+                btnCreate.classList = "btnModified"
+                btnCreate.innerText = "Modified"
+                element.parentElement.appendChild(btnCreate)
+                input.value = ' '
+                btnCreate.addEventListener('click', () => {
+                   let test = element.parentElement
+                    // test.innerText = input.value
+                    // btnCreate.remove()
+                    console.log(test);
+                    test.append(supprime, modifier)
+               
+                }) 
+            })
+            console.log(1);
+        })
+
+
+
+
+
+
+
+        // TROUVER UN MOYEN DE CLICKER SUR MODIFIER POVOIR MODIFIER A L INFINIS SANS BEUG
+        // A placer dans mes ToDo , DO , ALL
+        // element.addEventListener('dblclick', ()=>{
+        //     element.style.backgroundColor="green"
+        // })
