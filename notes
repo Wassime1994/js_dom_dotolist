@@ -1,39 +1,60 @@
-  console.log(element.children);
-        let supprAll = document.querySelectorAll('.supprime')
-        let modifAll = document.querySelectorAll('.modif')
-        supprAll.forEach(element => {
-            element.addEventListener('click', () => {
-                element.parentElement.remove()
-            })
-        })
-        modifAll.forEach(element => {
-            element.addEventListener('click', () => {
-                element.parentElement.append(input)
-                btnCreate = document.createElement('button')
-                btnCreate.classList = "btnModified"
-                btnCreate.innerText = "Modified"
-                element.parentElement.appendChild(btnCreate)
-                input.value = ' '
-                btnCreate.addEventListener('click', () => {
-                   let test = element.parentElement
-                    // test.innerText = input.value
-                    // btnCreate.remove()
-                    console.log(test);
-                    test.append(supprime, modifier)
-               
-                }) 
-            })
-            console.log(1);
-        })
+// /////
 
+// screen.addEventListener('focus', ()=>{
+//     window.addEventListener('keydown', (event)=>{
+//         if(event.key=="Enter") { 
+//     modifier = document.createElement('i')
+//     modifier.className = "fas fa-exchange-alt modif"
+//     supprime = document.createElement('i')
+//     supprime.className = "fas fa-trash-alt supprime"
+//     // Creation de ma div
+//     divCreate = document.createElement('div');
+//     divCreate.className = "divCreate"
+//     divCreate.textContent = screen.value
+//     screen.value = ""
+//     root.appendChild(divCreate)
+//     children.push(divCreate)
+//     divCreate.appendChild(supprime)
+//     divCreate.appendChild(modifier)
+//     let select = document.createElement('input')
+//     select.type = "checkbox"
+//     select.classList = "select"
+//     divCreate.appendChild(select)
+//     children.forEach(element => {
+//         let modifier = element.querySelector('.modif')
+//         let supprimer = element.querySelector('.supprime')
+//         modifier.addEventListener('click', () => {
+//             modifier.parentElement.appendChild(input)
+//             let createModifBtn = document.createElement('button')
+//             createModifBtn.innerText = "Modif"
+//             createModifBtn.className = "btnModified"
+//             modifier.parentElement.appendChild(createModifBtn)
+//             createModifBtn.addEventListener('click', () => {
+//                 createModifBtn.parentElement.innerText = input.value
+//                 element.append(supprimer)
+//                 element.append(modifier)
+//                 element.append(select)
 
+//             })
 
+//         })
+//         supprimer.addEventListener('click', () => {
+//             supprimer.parentElement.remove()
+//         })
 
+//         select.addEventListener('click', () => {
+//            if(select.checked==true) {
+//                select.parentElement.style.backgroundColor = "yellow"
+//                stock.push(select.parentElement)
+//            }
+//            else if(select.checked == false){ 
+//             select.parentElement.style.backgroundColor = "white"
+            
+//            }
+//         })
+//     })
+//         }
+//     })
 
-
-
-        // TROUVER UN MOYEN DE CLICKER SUR MODIFIER POVOIR MODIFIER A L INFINIS SANS BEUG
-        // A placer dans mes ToDo , DO , ALL
-        // element.addEventListener('dblclick', ()=>{
-        //     element.style.backgroundColor="green"
-        // })
+// })
+        

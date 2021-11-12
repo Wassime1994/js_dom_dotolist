@@ -1,91 +1,15 @@
-// import {screen} from "./enter"
-let btn_add = document.getElementById('btn_add');
-let root = document.getElementById('root');
-let clear = document.querySelector('.clear')
-let children = [];
-// mon input pour changer quand on clique sur modifier
-let input = document.createElement('input')
-input.style.width = "100%";
-input.style.height = "43px";
-// Ma div de creation
-let divCreate;
-let allDiv = document.querySelectorAll('.div')
-// Mes deux variables de modification
+import {btn_add, root,clear,children,input ,btnto_do  ,btn_do,btnAll,array_do,stock,screen} from "./Enter.js"
 let modifier;
-let supprime;
-let btn_do = document.querySelector('.btn_do')
-console.log(btn_do)
-let btnto_do = document.querySelector('.btn_todo')
-let btnAll = document.querySelector('.btn_all')
-let btnCreate;
-let array_do = []
-let stock = []
-let screen = document.getElementById('screen');
-
-
-// /////
-
-screen.addEventListener('focus', ()=>{
-    window.addEventListener('keydown', (event)=>{
-        if(event.key=="Enter") { 
-        modifier = document.createElement('i')
-    modifier.className = "fas fa-exchange-alt modif"
-    supprime = document.createElement('i')
-    supprime.className = "fas fa-trash-alt supprime"
-    // Creation de ma div
-    divCreate = document.createElement('div');
-    divCreate.className = "divCreate"
-    divCreate.textContent = screen.value
-    screen.value = ""
-    root.appendChild(divCreate)
-    children.push(divCreate)
-    divCreate.appendChild(supprime)
-    divCreate.appendChild(modifier)
-    let select = document.createElement('input')
-    select.type = "checkbox"
-    select.classList = "select"
-    divCreate.appendChild(select)
-    children.forEach(element => {
-        let modifier = element.querySelector('.modif')
-        let supprimer = element.querySelector('.supprime')
-        modifier.addEventListener('click', () => {
-            modifier.parentElement.appendChild(input)
-            let createModifBtn = document.createElement('button')
-            createModifBtn.innerText = "Modif"
-            createModifBtn.className = "btnModified"
-            modifier.parentElement.appendChild(createModifBtn)
-            createModifBtn.addEventListener('click', () => {
-                createModifBtn.parentElement.innerText = input.value
-                element.append(supprimer)
-                element.append(modifier)
-                element.append(select)
-
-            })
-
-        })
-        supprimer.addEventListener('click', () => {
-            supprimer.parentElement.remove()
-        })
-
-        select.addEventListener('click', () => {
-           if(select.checked==true) {
-               select.parentElement.style.backgroundColor = "yellow"
-               stock.push(select.parentElement)
-           }
-           else if(select.checked == false){ 
-            select.parentElement.style.backgroundColor = "white"
-            
-           }
-        })
-    })
-        }
-    })
-
-})
-        
+ let supprime;
+let divCreate;
 
 
 btn_add.addEventListener('click', () => {
+    if(screen.value=="") { 
+        alert('Merci d entrer une valeur ')
+        console.log(screen.value)
+    }
+    else { 
     // Creation de mess icones  au bout a droite donner une classe afin de faciliter le css
     modifier = document.createElement('i')
     modifier.className = "fas fa-exchange-alt modif"
@@ -104,49 +28,106 @@ btn_add.addEventListener('click', () => {
     select.type = "checkbox"
     select.classList = "select"
     divCreate.appendChild(select)
+
+
+
     children.forEach(element => {
         let modifier = element.querySelector('.modif')
-        let supprimer = element.querySelector('.supprime')
+        let supprime = element.querySelector('.supprime')
+        supprime.className = "fas fa-trash-alt supprime"
+        let select = document.createElement('input')
+        select.type = "checkbox"
+        select.classList = "select"
+
+
         modifier.addEventListener('click', () => {
             modifier.parentElement.appendChild(input)
             let createModifBtn = document.createElement('button')
             createModifBtn.innerText = "Modif"
             createModifBtn.className = "btnModified"
             modifier.parentElement.appendChild(createModifBtn)
-            createModifBtn.addEventListener('click', () => {
-                createModifBtn.parentElement.innerText = input.value
-                element.appendChild(modifier)
-                element.appendChild(supprime)
-                element.appendChild(select)
+             ;
+            createModifBtn.addEventListener('click', () =>{
+              console.log(select.checked)
+                element.innerText=input.value
+                element.append(modifier)
+                element.append(supprime)
+                element.append(select)
+                let selectAll = document.querySelectorAll('.select')
+                selectAll.forEach(element=>{
+                    element.addEventListener('click' ,()=>{
+                      
+                       if(element.checked==true) {
+                           element.parentElement.style.backgroundColor = "yellow"
+                           
+                         }
+                         else if(element.checked == false){ 
+                          element.parentElement.style.backgroundColor = "red"
+                          
+                         }
+                    })
+                })            
 
             })
+        
+            if(element.style.backgroundColor=="yellow") { 
+                select.checked = true
+            }
 
         })
-        supprimer.addEventListener('click', () => {
-            supprimer.parentElement.remove()
-        })
 
-        select.addEventListener('click', () => {
-           if(select.checked==true) {
-               select.parentElement.style.backgroundColor = "yellow"
-               stock.push(select.parentElement)
-           }
-           else if(select.checked == false){ 
-            select.parentElement.style.backgroundColor = "white"
-            
-           }
+
+        supprime.addEventListener('click', () => {
+            supprime.parentElement.remove()
+            // children.splice(children.indexOf(supprime.parentElement), 1)
+            console.log(children)
+            console.log(supprime.parentElement)
         })
+         let selectAll = document.querySelectorAll('.select')
+         selectAll.forEach(element=>{
+             element.addEventListener('click' ,()=>{
+               
+                if(element.checked==true) {
+                    element.parentElement.style.backgroundColor = "yellow"
+                    
+                  }
+                  else if(element.checked == false){ 
+                   element.parentElement.style.backgroundColor = "red"
+                   
+                  }
+             })
+         })
+
     })
+
+
+
+}
+})
+
+children.forEach(element => {
+    root.appendChild(element)
+    console.log(element)
+    let supprime = element.querySelector('.supprime')
+    supprime.addEventListener('click', () => {
+        supprime.parentElement.remove()
+        children.splice(children.indexOf(supprime.parentElement), 1)
+
+        })
 
 })
 
-
-
-
+clear.addEventListener('click', () => {
+    root.innerHTML = ""
+    location.reload()
+})
 
 btn_do.addEventListener('click', () => {
   root.innerHTML=''
   children.forEach(element=>{
+    //  supprime.addEventListener('click', () => {
+    //     children.splice(children.indexOf(element), 1)
+    //     })
       if(element.style.backgroundColor=="yellow") { 
           root.appendChild(element)
       }
@@ -154,26 +135,50 @@ btn_do.addEventListener('click', () => {
   
 })
 
-btnAll.addEventListener('click', () => {
-    console.log(array_do)
-    root.innerHTML = ""
-    children.forEach(element => {
-        root.appendChild(element)
-    })
-
-
-})
-
 btnto_do.addEventListener('click', ()=>{
     root.innerHTML=""
     children.forEach(element=>{
+        let supprime = element.querySelector('.supprime')
+        supprime.addEventListener('click', () => {
+           children.splice(children.indexOf(element), 1)
+           })
         if(element.style.backgroundColor!=="yellow"){
             root.appendChild(element)
         }
     })
 })
-
-clear.addEventListener('click', () => {
-    root.innerHTML = ""
-    location.reload()
+document.body.addEventListener('keydown', (e)=>{
+    if(e.key=="Enter") { 
+        if(screen.value == "") { 
+            alert('entre une valeur')
+        }
+        else {
+            btn_add.click()
+        }
+    }
 })
+btnAll.addEventListener('click', () => {
+    children.forEach(element => {
+           root.appendChild(element)
+            let modifier = element.querySelector('.modif')
+             supprime = element.querySelector('.supprime')
+            supprime.className = "fas fa-trash-alt supprime"
+            let select = document.createElement('input')
+            select.type = "checkbox"
+            select.classList = "select"
+            modifier.addEventListener('click', ()=>{
+                let createModifBtn = document.createElement('button')
+                createModifBtn.innerText = "Modif"
+                createModifBtn.className = "btnModified"
+
+            })
+    })
+    })
+
+
+
+
+
+
+
+
